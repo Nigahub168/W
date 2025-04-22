@@ -2,7 +2,7 @@ Library = {}
 SaveTheme = {}
 
 local themes = {
-	index = {'Dark', 'Amethyst'},
+	index = {'Dark', 'Amethyst', 'White'},
 	Amethyst = {
 		['Shadow'] = Color3.fromRGB(24, 24, 31),
 		['Background'] = Color3.fromRGB(29, 28, 38),
@@ -151,6 +151,40 @@ local themes = {
 				['Color Select'] = {
 					['Background'] = Color3.fromRGB(20, 20, 20),
 					['UIStroke'] = Color3.fromRGB(230, 230, 230),
+				}
+			}
+		}
+	}
+},
+	White = {
+		['Shadow'] = Color3.fromRGB(240, 240, 240),
+		['Background'] = Color3.fromRGB(255, 255, 255),
+		['Page'] = Color3.fromRGB(250, 250, 250),
+		['Main'] = Color3.fromRGB(200, 200, 200),
+		['Text & Icon'] = Color3.fromRGB(30, 30, 30),
+		['Function'] = {
+			['Toggle'] = {
+				['Background'] = Color3.fromRGB(255, 255, 255),
+				['True'] = {
+					['Toggle Background'] = Color3.fromRGB(220, 220, 220),
+					['Toggle Value'] = Color3.fromRGB(0, 120, 255),
+				},
+				['False'] = {
+					['Toggle Background'] = Color3.fromRGB(240, 240, 240),
+					['Toggle Value'] = Color3.fromRGB(200, 200, 200),
+				}
+			},
+			['Label'] = {
+				['Background'] = Color3.fromRGB(255, 255, 255),
+			},
+			['Dropdown'] = {
+				['Background'] = Color3.fromRGB(255, 255, 255),
+				['Value Background'] = Color3.fromRGB(245, 245, 245),
+				['Value Stroke'] = Color3.fromRGB(200, 200, 200),
+				['Dropdown Select'] = {
+					['Background'] = Color3.fromRGB(245, 245, 245),
+					['Search'] = Color3.fromRGB(235, 235, 235),
+					['Item Background'] = Color3.fromRGB(240, 240, 240),
 				}
 			}
 		}
