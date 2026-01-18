@@ -1,32 +1,32 @@
-if game.CoreGui:FindFirstChild("awidhiahsdibawgduyiagwiydgaiysdgiaywdgiaysgdiagwdiaysdguiaywdguaywgduaysdguaywdgauywdga") then
-    game.CoreGui:FindFirstChild("awidhiahsdibawgduyiagwiydgaiysdgiaywdgiaysgdiagwdiaysdguiaywdguaywgduaysdguaywdgauywdga"):Destroy()
+local COREGUI = game.CoreGui
+local existing = COREGUI:FindFirstChild("awidhiahsdibawgduyiagwiydgaiysdgiaywdgiaysgdiagwdiaysdguiaywdguaywgduaysdguaywdgauywdga")
+if existing then
+    existing:Destroy()
 end
 
-local TweenService = game:GetService("TweenService")
-local Lighting = game:GetService("Lighting")
-local UserInputService = game:GetService("UserInputService")
+local TweenService       = game:GetService("TweenService")
+local Lighting           = game:GetService("Lighting")
+local UserInputService   = game:GetService("UserInputService")
 
 local loadingGui = Instance.new("ScreenGui")
 loadingGui.Name = "LoadingScreen"
 loadingGui.IgnoreGuiInset = true
 loadingGui.ResetOnSpawn = false
 loadingGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-loadingGui.Parent = game.CoreGui
+loadingGui.Parent = COREGUI
 
-local loadBlur = Instance.new("BlurEffect")
+local loadBlur = Instance.new("BlurEffect", Lighting)
 loadBlur.Size = 0
-loadBlur.Parent = Lighting
-
-TweenService:Create(loadBlur, TweenInfo.new(0.5), {Size = 24}):Play()
+TweenService:Create(loadBlur, TweenInfo.new(0.5), { Size = 24 }):Play()
 
 local overlay = Instance.new("Frame", loadingGui)
 overlay.Size = UDim2.fromScale(1, 1)
-overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundColor3 = Color3.new(0, 0, 0)
 overlay.BackgroundTransparency = 0.3
 overlay.BorderSizePixel = 0
 
 local loadBox = Instance.new("Frame", loadingGui)
-loadBox.Size = UDim2.fromOffset(0, 0)
+loadBox.Size = UDim2.fromOffset(200, 180)
 loadBox.Position = UDim2.fromScale(0.5, 0.5)
 loadBox.AnchorPoint = Vector2.new(0.5, 0.5)
 loadBox.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
@@ -37,58 +37,31 @@ loadBoxStroke.Color = Color3.fromRGB(0, 170, 255)
 loadBoxStroke.Thickness = 2
 loadBoxStroke.Transparency = 0.5
 
-TweenService:Create(loadBox, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-	Size = UDim2.fromOffset(200, 180)
-}):Play()
+TweenService:Create(loadBox, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Size = UDim2.fromOffset(200, 180) }):Play()
 
 task.wait(0.3)
 
 local spinnerContainer = Instance.new("Frame", loadBox)
 spinnerContainer.Size = UDim2.fromOffset(60, 60)
-spinnerContainer.Position = UDim2.new(0.5, 0, 0.35, 0)
+spinnerContainer.Position = UDim2.new(0.5, 0.35, 0, 0)
 spinnerContainer.AnchorPoint = Vector2.new(0.5, 0.5)
 spinnerContainer.BackgroundTransparency = 1
 
-local spinner = Instance.new("Frame", spinnerContainer)
-spinner.Size = UDim2.fromScale(1, 1)
-spinner.BackgroundTransparency = 1
-
-local spinnerRing = Instance.new("UIStroke", spinner)
-spinnerRing.Color = Color3.fromRGB(0, 170, 255)
-spinnerRing.Thickness = 4
-spinnerRing.Transparency = 0
-
-Instance.new("UICorner", spinner).CornerRadius = UDim.new(1, 0)
-
-local spinnerArc = Instance.new("Frame", spinnerContainer)
-spinnerArc.Size = UDim2.fromScale(1, 1)
-spinnerArc.BackgroundTransparency = 1
-
-local arcStroke = Instance.new("UIStroke", spinnerArc)
-arcStroke.Color = Color3.fromRGB(60, 60, 60)
-arcStroke.Thickness = 4
-arcStroke.Transparency = 0.5
-
-Instance.new("UICorner", spinnerArc).CornerRadius = UDim.new(1, 0)
-
 local spinnerGlow = Instance.new("Frame", spinnerContainer)
 spinnerGlow.Size = UDim2.fromScale(1.2, 1.2)
-spinnerGlow.Position = UDim2.fromScale(0.5, 0.5)
+spinnerGlow.Position = UDim2.new(0.5, 0.5, 0, 0)
 spinnerGlow.AnchorPoint = Vector2.new(0.5, 0.5)
 spinnerGlow.BackgroundTransparency = 1
-
 local glowStroke = Instance.new("UIStroke", spinnerGlow)
 glowStroke.Color = Color3.fromRGB(0, 170, 255)
 glowStroke.Thickness = 6
 glowStroke.Transparency = 0.7
-
 Instance.new("UICorner", spinnerGlow).CornerRadius = UDim.new(1, 0)
 
 local loadText = Instance.new("TextLabel", loadBox)
 loadText.Size = UDim2.new(1, 0, 0, 20)
 loadText.Position = UDim2.new(0, 0, 0.7, 0)
 loadText.BackgroundTransparency = 1
-loadText.Text = "Loading"
 loadText.Font = Enum.Font.GothamBold
 loadText.TextSize = 16
 loadText.TextColor3 = Color3.new(1, 1, 1)
@@ -104,45 +77,37 @@ progressFill.Size = UDim2.fromScale(0, 1)
 progressFill.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
 Instance.new("UICorner", progressFill).CornerRadius = UDim.new(1, 0)
 
-local progressGlow = Instance.new("Frame", progressFill)
-progressGlow.Size = UDim2.new(1, 0, 3, 0)
-progressGlow.Position = UDim2.fromScale(0, -1)
-progressGlow.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-progressGlow.BackgroundTransparency = 0.7
-Instance.new("UICorner", progressGlow).CornerRadius = UDim.new(1, 0)
-
-local spinSpeed = 1.5
 local spinning = true
-
 task.spawn(function()
-	while spinning do
-		spinnerContainer.Rotation = spinnerContainer.Rotation + 6
-		spinnerGlow.Rotation = spinnerGlow.Rotation - 3
-		task.wait(0.016)
-	end
+    local container = spinnerContainer
+    local glow = spinnerGlow
+    local waitFunc = task.wait
+    while spinning do
+        container.Rotation += 6
+        glow.Rotation -= 3
+        waitFunc(0.016)
+    end
 end)
 
 task.spawn(function()
-	local dots = {"Loading", "Loading.", "Loading..", "Loading..."}
-	local i = 1
-	while spinning do
-		loadText.Text = dots[i]
-		i = i % 4 + 1
-		task.wait(0.3)
-	end
+    local dots = {"Loading", "Loading.", "Loading..", "Loading..."}
+    local idx = 1
+    local waitFunc = task.wait
+    while spinning do
+        loadText.Text = dots[idx]
+        idx = idx % #dots + 1
+        waitFunc(0.3)
+    end
 end)
 
-local loadSteps = {"Initializing...", "Loading UI...", "Setting up...", "Almost ready...", "Done!"}
-for i, step in ipairs(loadSteps) do
-	TweenService:Create(progressFill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {
-		Size = UDim2.fromScale(i / #loadSteps, 1)
-	}):Play()
-	task.wait(0.35)
+local loadSteps = {"Init...", "UI...", "Setup...", "Almost...", "Done!"}
+for i = 1, #loadSteps do
+    TweenService:Create(progressFill, TweenInfo.new(0.4), { Size = UDim2.fromScale(i / #loadSteps, 1) }):Play()
+    task.wait(0.35)
 end
 
 spinning = false
 loadText.Text = "Ready!"
-
 task.wait(0.3)
 
 TweenService:Create(spinnerRing, TweenInfo.new(0.2), {Transparency = 1}):Play()
