@@ -1,0 +1,131 @@
+UI:Notify("Warning","loading",3)
+
+local p1 = UI:CreatePanel("Main")
+p1.Left:CreateSwitchToggle("God Mode", true, function(v)
+    print(v)
+end)
+
+p1.Left:CreateButton("Kill All", function()
+    print("Killed All")
+end)
+
+p1.Right:CreateTextbox("Enter Speed", "100", function(v)
+    print(v)
+end)
+
+p1.Left:Craetedropdown("Select Mode", {"Easy","Normal","Hard"}, "Normal", function(v)
+    print(v)
+end)
+
+p1.Left:CreateSlider("Walk Speed",0,300,100,function(v)
+	print("Speed =", v)
+end)
+
+p1.Center:CreateButton("Teleport", function()
+    print("Teleported")
+end)
+
+p1.Right:CreateKeybind("Toggle Fly", Enum.KeyCode.F, function(key)
+    print("Keybind set to:", key.Name)
+end)
+
+p1.Right:CreateColorPicker("ESP Color", 255, 0, 100, function(color)
+    print("Color:", color)
+end)
+
+p1.Right:CreatePhoto("Target Player", function(player)
+    print("Selected:", player.Name)
+end)
+
+
+local p2 = UI:CreatePanel("Settings")
+p2.Left:CreateSwitchToggle("Auto Save", false, function(v)
+    print("Auto Save:", v)
+end)
+
+p2.Left:CreateSlider("Volume", 0, 100, 50, function(v)
+    print("Volume =", v)
+end)
+
+p2.Right:CreateTextbox("Username", "", function(v)
+    print("Username:", v)
+end)
+
+p2.Center:CreateButton("Save Settings", function()
+    print("Settings Saved!")
+end)
+
+
+local p3 = UI:CreatePanel("Player")
+p3.Left:CreateSwitchToggle("Fly Mode", false, function(v)
+    print("Fly:", v)
+end):AddKeybind("Toggle Key", Enum.KeyCode.F, function(state)
+    print("Toggled:", state)
+end)
+:AddSlider("Speed", 0, 500, 100, function(v)
+    print("Speed:", v)
+end)
+:AddDropdown("Mode", {"Normal","Fast","Slow"}, "Normal", function(v)
+    print("Mode:", v)
+end)
+:AddColorPicker("Color", 255, 0, 100, function(color)
+    print("Color:", color)
+end)
+
+p3.Left:CreateSlider("Jump Power", 0, 500, 50, function(v)
+    print("Jump =", v)
+end)
+
+p3.Left:CreateCopyButton("Place ID", function()
+    setclipboard(tostring(game.PlaceId))
+end)
+
+local dropdownx = p3.Right:Craetedropdown("Team", {"Red","Blue","Green"}, "Red", function(v)
+    print("Team:", v)
+end)
+
+p3.Right:CreateButton("Refresh", function()
+    dropdownx:Refresh()
+end)
+
+p3.Right:CreateButton("Add Purple", function()
+    dropdownx:Add("Purple")
+end)
+
+p3.Right:CreateButton("Keybind Show", function()
+    UI.KeybindFrame:Show()
+end)
+
+p3.Right:CreateButton("Keybind Close", function()
+    UI.KeybindFrame:Close()
+end)
+
+p3.Right:CreateButton("Keybind Toggle", function()
+    UI.KeybindFrame:Toggle()
+end)
+
+
+UI:Notify("Success","Load Success",3)
+
+UI:ExtraMouse()
+
+UI:ExtraMouse({
+    dashCount = 8,
+    radius = 25,
+    dashLength = 12,
+    dashThickness = 2,
+    speed = 1,
+    color = Color3.fromRGB(0, 170, 255)
+})
+
+-- UI:StopExtraMouse()
+
+UI:SetExtraMouseColor(Color3.fromRGB(255, 0, 100))
+
+UI:SetExtraMouseSpeed(5)
+
+UI:SetExtraMouseRadius(30)
+
+local multiDrop = p3.Left:Craetedropdown("Colors", {"Red","Blue","Green"}, {"Red"}, true, function(selectedStr)
+    print("String:", selectedStr)  -- "Red, Blue"
+end)
